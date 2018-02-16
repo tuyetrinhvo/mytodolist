@@ -1,2 +1,6 @@
-# mytodolist
-Améliorer une application existante de Todo &amp; Co
+ToDoList
+========
+
+Base du projet #8 : Améliorez un projet existant
+
+https://openclassrooms.com/projects/ameliorer-un-projet-existant-1
