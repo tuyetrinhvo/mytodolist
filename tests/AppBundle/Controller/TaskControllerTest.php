@@ -2,15 +2,16 @@
 
 namespace Tests\AppBundle\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class TaskControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testListPage()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/');
+        $client->request('GET', '/tasks');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
