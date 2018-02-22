@@ -40,6 +40,12 @@ class Task
      */
     private $isDone;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $author;
+
     public function __construct()
     {
         $this->createdAt = new \Datetime();
@@ -89,5 +95,29 @@ class Task
     public function toggle($flag)
     {
         $this->isDone = $flag;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \AppBundle\Entity\User $author
+     *
+     * @return Task
+     */
+    public function setAuthor(\AppBundle\Entity\User $author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }
