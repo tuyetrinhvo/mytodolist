@@ -14,8 +14,5 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
 
-        $client->followRedirect();
-
-        echo $client->getResponse()->getContent();
     }
 }
