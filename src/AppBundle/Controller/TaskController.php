@@ -3,15 +3,17 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
-use AppBundle\Form\TaskType;
+use AppBundle\Form\Type\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class TaskController extends Controller
 {
     /**
      * @Route("/tasks", name="task_list")
+     * @Method({"GET"})
      */
     public function listAction()
     {
@@ -20,6 +22,7 @@ class TaskController extends Controller
 
     /**
      * @Route("/tasks/create", name="task_create")
+     * @Method({"GET", "POST"})
      */
     public function createAction(Request $request)
     {
@@ -28,8 +31,9 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $task->setAuthor($this->getUser());
 
             $em->persist($task);
             $em->flush();
@@ -44,6 +48,7 @@ class TaskController extends Controller
 
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
+     * @Method({"GET", "POST"})
      */
     public function editAction(Task $task, Request $request)
     {
@@ -51,7 +56,7 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
@@ -67,6 +72,7 @@ class TaskController extends Controller
 
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle")
+     * @Method({"GET", "POST"})
      */
     public function toggleTaskAction(Task $task)
     {
@@ -80,9 +86,23 @@ class TaskController extends Controller
 
     /**
      * @Route("/tasks/{id}/delete", name="task_delete")
+     * @Method({"GET", "POST"})
      */
     public function deleteTaskAction(Task $task)
     {
+        // author anonyme
+        if($task->getAuthor() === NULL){
+            if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+                $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur');
+
+                return $this->redirectToRoute('task_list');
+            }
+        } elseif ($task->getAuthor()->getUsername() !== $this->get('security.token_storage')->getToken()->getUser()->getUsername()){
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas son auteur');
+
+            return $this->redirectToRoute('task_list');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);
         $em->flush();
