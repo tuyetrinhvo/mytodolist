@@ -1,8 +1,24 @@
-{% extends "::errorbase.html.twig" %}
+{% extends "::base.html.twig" %}
 
 
-    {% block status %}
-        <p>Quelque chose s'est mal passé. Merci de nous informer de ce que vous faisiez juste avant de rencontrer cette erreur.
-        Nous tâcherons de régler le problème le plus rapidement possible. Nous somme désolé du désagrément causé.</p>
+    {% block body %}
+
+        <br/>
+        <div class="container">
+
+            <h1>Oups! Une erreur est survenue</h1>
+            <br/>
+            <hr>
+            <h2>Le serveur retourne une erreur "{{ status_code }} {{ status_text }}".</h2>
+            <hr>
+            <h3>
+                Quelque chose est cassé. Nous allons la réparer dès que possible.<br/>
+                Nous sommes désolées pour le dérangement !
+            </h3>
+
+            <a href="{{ path('homepage') }}" class="btn btn-primary btn-xl">Retourner à l'accueil</a>
+
+        </div>
+
+
     {% endblock %}
-

@@ -1,8 +1,24 @@
-{% extends "::errorbase.html.twig" %}
+{% extends "::base.html.twig" %}
 
-    {% block status %}
-        <p>L'acces à cette route, avec cette méthode de requête est non autorisée...</p>
+
+    {% block body %}
+
+        <br/>
+        <div class="container">
+
+            <h1>Oups! Une erreur est survenue</h1>
+            <br/>
+            <hr>
+            <h2>Le serveur retourne une erreur "{{ status_code }} {{ status_text }}".</h2>
+            <hr>
+            <h3>
+                L'acces à cette route, avec cette méthode de requête est non autorisée...
+            </h3>
+
+            <a href="{{ path('homepage') }}" class="btn btn-primary btn-xl">Retourner à l'accueil</a>
+
+        </div>
+
+
     {% endblock %}
-
-
 
