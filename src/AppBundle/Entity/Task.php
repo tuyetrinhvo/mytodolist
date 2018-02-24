@@ -104,7 +104,7 @@ class Task
      *
      * @return Task
      */
-    public function setAuthor(\AppBundle\Entity\User $author)
+    public function setAuthor(\AppBundle\Entity\User $author = null)
     {
         $this->author = $author;
 
