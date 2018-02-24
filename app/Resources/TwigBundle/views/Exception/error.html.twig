@@ -1,24 +1,11 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-
+    {% block header_title %}<h1>Oups! Une erreur est survenue</h1>{% endblock %}
+    {% block header_img %}{% endblock %}
     {% block body %}
-
-        <br/>
-        <div class="container">
-
-            <h1>Oups! Une erreur est survenue</h1>
-            <br/>
+            <h2>Le serveur retourne une erreur "{{ status_code }}".</h2>
             <hr>
-            <h2>Le serveur retourne une erreur "{{ status_code }} {{ status_text }}".</h2>
+            <h3>Quelque chose est cassé. Nous allons la réparer dès que possible.<br/>Nous sommes désolées pour le dérangement !</h3>
             <hr>
-            <h3>
-                Quelque chose est cassé. Nous allons la réparer dès que possible.<br/>
-                Nous sommes désolées pour le dérangement !
-            </h3>
-
             <a href="{{ path('homepage') }}" class="btn btn-primary btn-xl">Retourner à l'accueil</a>
-
-        </div>
-
-
     {% endblock %}
