@@ -38,9 +38,14 @@
         <!-- Page Content -->
         <div class="container">
             <div class="row">
+                {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
+                <a href="{{ path('user_list') }}" class="btn btn-primary">Aller à la liste des utilisateurs
+                {% endif %}
 
                 {% if app.user %}
+                 <a href="{{ path('task_create') }}" class="btn btn-info">Créer une tâche</a>
+                <a href="{{ path('task_list') }}" class="btn btn-info">Aller à liste des tâches</a>
                 <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
                 {% endif %}
 
