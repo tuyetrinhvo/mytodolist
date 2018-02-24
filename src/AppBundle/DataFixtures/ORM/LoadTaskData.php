@@ -26,14 +26,20 @@ class LoadTaskData extends AbstractFixture implements FixtureInterface, OrderedF
         $task3->setContent("Troisième tâche ajoutée par datafixtures");
         $task3->setAuthor($this->getReference('myuser'));
 
+        $task4 = new Task();
+        $task4->setTitle("Tâche crée par auteur Admin");
+        $task4->setContent("Quatrième tâche ajoutée par datafixtures");
+        $task4->setAuthor($this->getReference('myadmin'));
+
         $manager->persist($task1);
         $manager->persist($task2);
         $manager->persist($task3);
+        $manager->persist($task4);
         $manager->flush();
     }
 
     public function getOrder()
     {
-        return 4;
+        return 3;
     }
 }
