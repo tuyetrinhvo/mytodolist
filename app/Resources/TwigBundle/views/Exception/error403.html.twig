@@ -7,11 +7,10 @@
     {% block header_title %}<h1>Oups! Une erreur est survenue</h1>{% endblock %}
 
     {% block body %}
-
         <h2>Le serveur retourne une erreur "{{ status_code }}".</h2>
 
         <hr>
-        <h3>Une erreur interne au serveur est survenue...</h3>
+        <h3>Il semblerait que vous n'êtes pas autorisé à afficher cette page !</h3>
 
         <hr>
         <a href="{{ path('homepage') }}" class="btn btn-primary btn-xl">Retourner à l'accueil</a>

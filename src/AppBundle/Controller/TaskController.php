@@ -91,17 +91,16 @@ class TaskController extends Controller
     public function deleteTaskAction(Task $task)
     {
         // anonymous author
-        if($task->getAuthor() === NULL)
+        if($task->getAuthor() === NULL || $task->getAuthor()->getUsername() === 'anonymous')
         {
-            if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
-            {
+            if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
                 $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur');
 
                 return $this->redirectToRoute('task_list');
             }
 
-        } elseif ($task->getAuthor()->getUsername() !== $this->get('security.token_storage')->getToken()->getUser()->getUsername())
-        {
+        } elseif ($task->getAuthor()->getUsername() !== $this->get('security.token_storage')->getToken()->getUser()->getUsername()) {
+
             $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas son auteur');
 
             return $this->redirectToRoute('task_list');
