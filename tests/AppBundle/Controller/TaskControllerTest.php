@@ -71,18 +71,27 @@ class TaskControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/tasks/1/edit');
 
-        $form = $crawler->selectButton('Modifier')->form();
+        $response = $this->client->getResponse()->getStatusCode();
 
-        $form['task[title]'] = 'Title modified For Test';
-        $form['task[content]'] = 'Content modified For Test';
+        if($this->client->getResponse()->isNotFound()) {
 
-        $this->client->submit($form);
+            $this->assertSame(404, $response);
 
-        $this->client->followRedirect();
+        } else {
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+            $form = $crawler->selectButton('Modifier')->form();
 
-        $this->assertContains('La tâche a bien été modifiée.', $this->client->getCrawler()->filter('.alert')->text());
+            $form['task[title]'] = 'Title modified For Test';
+            $form['task[content]'] = 'Content modified For Test';
+
+            $this->client->submit($form);
+
+            $this->client->followRedirect();
+
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+            $this->assertContains('La tâche a bien été modifiée.', $this->client->getCrawler()->filter('.alert')->text());
+        }
 
         //echo $this->client->getResponse()->getContent();
     }
@@ -93,16 +102,25 @@ class TaskControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/tasks/1/edit');
 
-        $form = $crawler->selectButton('Modifier')->form();
+        $response = $this->client->getResponse()->getStatusCode();
 
-        $form['task[title]'] = 'Title modified For Test';
-        $form['task[content]'] = '';
+        if($this->client->getResponse()->isNotFound()) {
 
-        $this->client->submit($form);
+            $this->assertSame(404, $response);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        } else {
 
-        $this->assertContains('Vous devez saisir du contenu.', $this->client->getCrawler()->filter('.help-block')->text());
+            $form = $crawler->selectButton('Modifier')->form();
+
+            $form['task[title]'] = 'Title modified For Test';
+            $form['task[content]'] = '';
+
+            $this->client->submit($form);
+
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+            $this->assertContains('Vous devez saisir du contenu.', $this->client->getCrawler()->filter('.help-block')->text());
+        }
 
         //echo $this->client->getResponse()->getContent();
     }
@@ -124,11 +142,22 @@ class TaskControllerTest extends AbstractControllerTest
 
         $this->client->request('POST', '/tasks/1/toggle');
 
-        $this->client->followRedirect();
+        $response = $this->client->getResponse()->getStatusCode();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        if($this->client->getResponse()->isNotFound()) {
 
-        $this->assertSame(1, $this->client->getCrawler()->filter('.alert')->count());
+            $this->assertSame(404, $response);
+
+        } else {
+
+            $this->assertSame(302, $response);
+
+            $this->client->followRedirect();
+
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+            $this->assertSame(1, $this->client->getCrawler()->filter('.alert')->count());
+        }
 
         //echo $this->client->getResponse()->getContent();
     }
@@ -139,11 +168,22 @@ class TaskControllerTest extends AbstractControllerTest
 
         $this->client->request('GET', '/tasks/1/delete');
 
-        $this->client->followRedirect();
+        $response = $this->client->getResponse()->getStatusCode();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        if($this->client->getResponse()->isNotFound()) {
 
-        $this->assertContains('Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur.', $this->client->getCrawler()->filter('.alert')->text());
+            $this->assertSame(404, $response);
+
+        } else {
+
+            $this->assertSame(302, $response);
+
+            $this->client->followRedirect();
+
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+            $this->assertContains('Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur.', $this->client->getCrawler()->filter('.alert')->text());
+        }
 
         //echo $this->client->getResponse()->getContent();
     }
@@ -154,11 +194,22 @@ class TaskControllerTest extends AbstractControllerTest
 
         $this->client->request('GET', '/tasks/1/delete');
 
-        $this->client->followRedirect();
+        $response = $this->client->getResponse()->getStatusCode();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        if($this->client->getResponse()->isNotFound()) {
 
-        $this->assertContains('La tâche a bien été supprimée.', $this->client->getCrawler()->filter('.alert')->text());
+            $this->assertSame(404, $response);
+
+        } else {
+
+            $this->assertSame(302, $response);
+
+            $this->client->followRedirect();
+
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+            $this->assertContains('La tâche a bien été supprimée.', $this->client->getCrawler()->filter('.alert')->text());
+        }
 
         //echo $this->client->getResponse()->getContent();
     }
