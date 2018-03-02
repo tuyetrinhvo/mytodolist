@@ -94,6 +94,7 @@ class TaskController extends Controller
         if($task->getAuthor() === NULL || $task->getAuthor()->getUsername() === 'anonyme')
         {
             if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+
                 $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur');
 
                 return $this->redirectToRoute('task_list');
