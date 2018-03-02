@@ -5,9 +5,9 @@ namespace tests\AppBundle\Form\Type;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\UserType;
-use Symfony\Component\Form\Test\TypeTestCase;
+use tests\AppBundle\Controller\AbstractControllerTest;
 
-class UserTypeTest extends TypeTestCase
+class UserTypeTest extends AbstractControllerTest
 {
     public function testSubmitValidData()
     {
@@ -17,7 +17,9 @@ class UserTypeTest extends TypeTestCase
             'email' => 'myemail@todolist.com'
         ];
 
-        $form = $this->factory->create(UserType::class);
+        $factory = $this->container->get('form.factory');
+
+        $form = $factory->create(UserType::class);
 
         $object = new User();
         $object->setUsername('myusername');
