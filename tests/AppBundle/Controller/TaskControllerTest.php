@@ -67,8 +67,6 @@ class TaskControllerTest extends AbstractControllerTest
 
     public function testEditTask()
     {
-        //$this->testCreateTask();
-
         $this->logIn(['ROLE_USER']);
 
         $crawler = $this->client->request('GET', '/tasks/1/edit');
@@ -91,8 +89,6 @@ class TaskControllerTest extends AbstractControllerTest
 
     public function testEditTaskInvalid()
     {
-        //$this->testCreateTask();
-
         $this->logIn(['ROLE_USER']);
 
         $crawler = $this->client->request('GET', '/tasks/1/edit');
@@ -115,7 +111,7 @@ class TaskControllerTest extends AbstractControllerTest
     {
         $this->logIn(['ROLE_USER']);
 
-        $this->client->request('GET', '/tasks/20/edit');
+        $this->client->request('GET', '/tasks/200/edit');
 
         $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
 
@@ -124,8 +120,6 @@ class TaskControllerTest extends AbstractControllerTest
 
     public function testToggleTask()
     {
-        //$this->testCreateTask();
-
         $this->logIn(['ROLE_USER']);
 
         $this->client->request('POST', '/tasks/1/toggle');
@@ -141,8 +135,6 @@ class TaskControllerTest extends AbstractControllerTest
 
     public function testDeleteTaskError()
     {
-        //$this->testCreateTask();
-
         $this->logIn(['ROLE_USER']);
 
         $this->client->request('GET', '/tasks/1/delete');
@@ -158,8 +150,6 @@ class TaskControllerTest extends AbstractControllerTest
 
     public function testDeleteTask()
     {
-        //$this->testCreateTask();
-
         $this->logIn(['ROLE_ADMIN']);
 
         $this->client->request('GET', '/tasks/1/delete');
