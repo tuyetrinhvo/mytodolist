@@ -71,8 +71,8 @@ class UserControllerTest extends AbstractControllerTest
 
         $form = $crawler->selectButton('Modifier')->form();
 
-        $form['user[username]'] = 'ttrinh';
-        $form['user[email]'] = 'ttrinh@tuyetrinhvt.fr';
+        $form['user[username]'] = 'tuyetrinhvo';
+        $form['user[email]'] = 'tuyetrinhvo@tuyetrinhvt.fr';
         $form['user[password][first]'] = 'password';
         $form['user[password][second]'] = 'password';
         //$form['user[roles]'] = ['ROLE_USER'];
@@ -108,6 +108,17 @@ class UserControllerTest extends AbstractControllerTest
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->assertContains('Les deux mots de passe doivent correspondre.', $this->client->getCrawler()->filter('.help-block')->text());
+
+        //echo $this->client->getResponse()->getContent();
+    }
+
+    public function testUserAccessDenied()
+    {
+        $this->logIn(['ROLE_USER']);
+
+        $this->client->request('GET', '/users');
+
+        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
 
         //echo $this->client->getResponse()->getContent();
     }
