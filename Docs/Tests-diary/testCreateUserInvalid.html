@@ -1,0 +1,98 @@
+PHPUnit 5.7.27 by Sebastian Bergmann and contributors.
+
+.                                                                  1 / 1 (100%)<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>To Do List app</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="/css/shop-homepage.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">To Do List app</a>
+
+                    <img src="/img/Logo_OpenClassrooms.png" alt="OpenClassrooms" />
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                                <a href="/users/create" class="btn btn-primary">Créer un utilisateur</a>
+                <a href="/users" class="btn btn-primary">Aller à la liste des utilisateurs
+                
+                
+                                <a href="/login" class="btn btn-success">Se connecter</a>
+                            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    
+                    <h1>Créer un utilisateur</h1>                                    </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                        <div class="row">
+        <form name="user" method="post" action="/users/create">
+            <div id="user"><div class="form-group has-error"><label class="control-label required" for="user_username">Nom d&#039;utilisateur</label><input type="text" id="user_username" name="user[username]" required="required" class="form-control" /><span class="help-block">    <ul class="list-unstyled"><li><span class="glyphicon glyphicon-exclamation-sign"></span> Vous devez saisir un nom d&#039;utilisateur.</li></ul>
+    </span></div><div class="form-group"><label class="control-label required" for="user_password_first">Mot de passe</label><input type="password" id="user_password_first" name="user[password][first]" required="required" class="form-control" /></div><div class="form-group"><label class="control-label required" for="user_password_second">Tapez le mot de passe à nouveau</label><input type="password" id="user_password_second" name="user[password][second]" required="required" class="form-control" /></div><div class="form-group"><label class="control-label required" for="user_email">Adresse email</label><input type="email" id="user_email" name="user[email]" required="required" class="form-control" value="ttrinh@tuyetrinhvt.fr" /></div><div class="form-group"><label class="control-label required">Type de compte</label><div id="user_roles"><div class="checkbox"><label for="user_roles_0" class=""><input type="checkbox" id="user_roles_0" name="user[roles][]" value="ROLE_USER" checked="checked" /> User</label></div><div class="checkbox"><label for="user_roles_1" class=""><input type="checkbox" id="user_roles_1" name="user[roles][]" value="ROLE_ADMIN" /> Admin</label></div></div></div><input type="hidden" id="user__token" name="user[_token]" value="hcKrHITQOgDl-8rVqn-ml7bB2Yq5-Hkp1Uk9mPEyI54" /></div>
+
+            <button type="submit" class="btn btn-success pull-right">Ajouter</button>
+        </form>
+    </div>
+
+    <a href="/" class="btn btn-primary btn-xl">Retourner à l'accueil</a>
+
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+
+        <div class="container">
+
+            <hr>
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="pull-right">Copyright &copy; OpenClassrooms</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
+
+
+Time: 1.25 seconds, Memory: 31.75MB
+
+[30;42mOK (1 test, 2 assertions)[0m

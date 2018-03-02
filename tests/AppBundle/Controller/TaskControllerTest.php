@@ -3,17 +3,25 @@
 namespace Tests\AppBundle\Controller;
 
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class TaskControllerTest extends WebTestCase
+class TaskControllerTest extends AbstractControllerTest
 {
-    public function testListPage()
+    public function testListPageTask()
     {
-        $client = static::createClient();
+        $this->client->request('GET', '/tasks');
 
-        $client->request('GET', '/tasks');
-
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
+
+    public function testListPageTaskLogIn()
+    {
+        $this->logIn(['ROLE_USER']);
+
+        $this->client->request('GET', '/tasks');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        //echo $this->client->getResponse()->getContent();
+    }
+
+
 }

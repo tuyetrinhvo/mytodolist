@@ -2,17 +2,14 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class SecurityControllerTest extends WebTestCase
+class SecurityControllerTest extends AbstractControllerTest
 {
     public function testSecurityPage()
     {
-        $client = static::createClient();
+        $this->client->request('GET', '/login');
 
-        $client->request('GET', '/login');
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
     }
 }
