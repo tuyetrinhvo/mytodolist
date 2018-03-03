@@ -3473,6 +3473,7 @@
         },
         {
             "name": "twig/twig",
+
             "version": "v1.35.2",
             "source": {
                 "type": "git",
@@ -3483,6 +3484,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/9c24f2cd39dc1906b76879e099970b7e53724601",
                 "reference": "9c24f2cd39dc1906b76879e099970b7e53724601",
+
                 "shasum": ""
             },
             "require": {
@@ -3534,7 +3536,9 @@
             "keywords": [
                 "templating"
             ],
+
             "time": "2018-03-03T16:21:29+00:00"
+
         },
         {
             "name": "webmozart/assert",
