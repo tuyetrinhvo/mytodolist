@@ -17,7 +17,7 @@ class EditOldTasksCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $inputInterface, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $oldTasks = $em->getRepository('AppBundle:Task')->findByAuthor(null);

@@ -36,7 +36,7 @@ Clone or download the repository
 
 Update Composer.json
 
-## Use the command :
+### Create database :
 
     php bin/console doctrine:database:create
 
@@ -44,7 +44,11 @@ Update Composer.json
 
     php bin/console doctrine:fixtures:load
     
-#### Install the test database :  
+### Link old tasks to an "anonymous" user :
+
+    php bin/console update:old:tasks
+    
+### Install the test database :  
   
     php bin/console doctrine:database:create --env=test
     
@@ -52,9 +56,16 @@ Update Composer.json
     
     php bin/console doctrine:fixtures:load --env=test
  
- ##### Run the automated tests
+ ### Run the automated tests
  
     php vendor/bin/phpunit
+ or
+ 
+    ./vendor/phpunit/phpunit/phpunit
+    
+### Create the code coverage with phpunit
+
+    vendor/bin/phpunit --coverage-html docs/code-coverage
     
  --------------
  
