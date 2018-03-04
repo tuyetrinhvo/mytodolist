@@ -23,8 +23,8 @@ class UserControllerTest extends AbstractControllerTest
 
         $form = $crawler->selectButton('Ajouter')->form();
 
-        $form['user[username]'] = 'tuyetrinh';
-        $form['user[email]'] = 'tuyetrinh@tuyetrinhvt.fr';
+        $form['user[username]'] = 'user'.mt_rand();
+        $form['user[email]'] = 'user'.mt_rand().'@tuyetrinhvt.fr';
         $form['user[password][first]'] = 'password';
         $form['user[password][second]'] = 'password';
         $form['user[roles]'] = ['ROLE_USER'];

@@ -40,7 +40,7 @@ Update Composer.json
 
     php bin/console doctrine:database:create
 
-    php bin/console doctrine:schema:update --force
+    php bin/console doctrine:schema:create
 
     php bin/console doctrine:fixtures:load
     
@@ -48,13 +48,13 @@ Update Composer.json
   
     php bin/console doctrine:database:create --env=test
     
-    php bin/console doctrine:schema:update --force --env=test
+    php bin/console doctrine:schema:create --env=test
     
     php bin/console doctrine:fixtures:load --env=test
  
  ##### Run the automated tests
  
-    php ./vendor/phpunit/phpunit/phpunit
+    php vendor/bin/phpunit
     
  --------------
  
