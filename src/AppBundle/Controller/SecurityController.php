@@ -26,21 +26,24 @@ class SecurityController extends Controller
         ));
     }
 
-    /**
+}
+
+ /*   /**
      * @Route("/login_check", name="login_check")
      * @Method({"POST"})
      */
-    public function loginCheckAction()
+/*    public function loginCheckAction()
     {
         // This code is never executed.
     }
 
-    /**
+/*    /**
      * @Route("/logout", name="logout")
      * @Method({"GET"})
      */
-    public function logoutCheckAction()
+/*    public function logoutCheckAction()
     {
         // This code is never executed.
     }
 }
+*/

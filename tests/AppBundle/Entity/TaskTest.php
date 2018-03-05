@@ -13,10 +13,11 @@ class TaskTest extends WebTestCase
         $task = new Task();
         $task->setTitle('A TaskTest');
         $task->setContent('Create a new task test');
+        $task->setCreatedAt('2018-03-04 18:30:00');
+
 
         $this->assertSame('A TaskTest', $task->getTitle());
         $this->assertSame('Create a new task test', $task->getContent());
-
-
+        $this->assertSame('2018-03-04 18:30:00', $task->getCreatedAt());
     }
 }

@@ -14,10 +14,12 @@ class UserTest extends WebTestCase
         $user->setUsername('myusername');
         $user->setPassword('mypassword');
         $user->setEmail('myemail@todolist.com');
+        $user->setRoles(['ROLE_USER']);
 
         $this->assertSame('myusername', $user->getUsername());
         $this->assertSame('mypassword', $user->getPassword());
         $this->assertEquals('myemail@todolist.com', $user->getEmail());
+        $this->assertSame(['ROLE_USER'], $user->getRoles());
 
 
     }

@@ -19,8 +19,8 @@ class EditOldTasksCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $inputInterface, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $oldTasks = $em->getRepository('AppBundle:Task')->findByAuthor(null);
+        $entityManager = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $oldTasks = $entityManager->getRepository('AppBundle:Task')->findByAuthor(null);
 
         if (!empty($oldTasks)) {
 
@@ -28,15 +28,15 @@ class EditOldTasksCommand extends ContainerAwareCommand
             $userAnonyme->setUsername('anonyme');
             $userAnonyme->setEmail('anonyme@anonyme.com');
             $userAnonyme->setPassword('anonyme');
-            $em->persist($userAnonyme);
+            $entityManager->persist($userAnonyme);
 
             foreach ($oldTasks as $task) { $task->setAuthor($userAnonyme); }
-            $em->flush();
+            $entityManager->flush();
 
             $output->writeln('Old Tasks are updated !');
 
         } else {
-            $output->writeln('Old Tasks were already updated !');
+            $output->writeln('Old Tasks are updated !');
         }
     }
 }

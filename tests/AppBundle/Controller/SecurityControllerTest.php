@@ -37,27 +37,7 @@ class SecurityControllerTest extends AbstractControllerTest
 
     public function testLogIn()
     {
-        $this->logIn(['ROLE_ADMIN']);
-        $crawler = $this->client->request('GET', '/users/create');
-
-        $form = $crawler->selectButton('Ajouter')->form();
-
-        $form['user[username]'] = 'mailys';
-        $form['user[email]'] = 'mailys@tuyetrinhvt.fr';
-        $form['user[password][first]'] = 'zsx';
-        $form['user[password][second]'] = 'zsx';
-        $form['user[roles]'] = ['ROLE_USER'];
-
-        $this->client->submit($form);
-
-        $crawler = $this->client->request('GET', '/login');
-
-        $form = $crawler->selectButton('Se connecter')->form();
-
-        $form['_username'] = 'mailys';
-        $form['_password'] = 'zsx';
-
-        $this->client->submit($form);
+        $this->logInForTest();
 
         $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
 

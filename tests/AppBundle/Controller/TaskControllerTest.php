@@ -3,6 +3,9 @@
 namespace Tests\AppBundle\Controller;
 
 
+use AppBundle\Entity\Task;
+use AppBundle\Entity\User;
+
 class TaskControllerTest extends AbstractControllerTest
 {
     public function testListPageTask()
@@ -162,7 +165,7 @@ class TaskControllerTest extends AbstractControllerTest
         //echo $this->client->getResponse()->getContent();
     }
 
-    public function testDeleteTaskError()
+    public function testDeleteTaskErrorAnonymous()
     {
         $this->logIn(['ROLE_USER']);
 
@@ -183,6 +186,34 @@ class TaskControllerTest extends AbstractControllerTest
             $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
             $this->assertContains('Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur.', $this->client->getCrawler()->filter('.alert')->text());
+        }
+
+        //echo $this->client->getResponse()->getContent();
+    }
+
+    public function testDeleteTaskErrorAuthor()
+    {
+        $this->createTaskForTest();
+
+        $this->logInForTest();
+
+        $this->client->request('GET', '/tasks/2/delete');
+
+        $response = $this->client->getResponse()->getStatusCode();
+
+        if($this->client->getResponse()->isNotFound()) {
+
+            $this->assertSame(404, $response);
+
+        } else {
+
+            $this->assertSame(302, $response);
+
+            $this->client->followRedirect();
+
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+            $this->assertContains('Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas son auteur.', $this->client->getCrawler()->filter('.alert')->text());
         }
 
         //echo $this->client->getResponse()->getContent();
@@ -213,7 +244,5 @@ class TaskControllerTest extends AbstractControllerTest
 
         //echo $this->client->getResponse()->getContent();
     }
-
-
 
 }
