@@ -7,6 +7,7 @@ use AppBundle\Form\Type\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class TaskController extends Controller
@@ -17,14 +18,18 @@ class TaskController extends Controller
      */
     public function listAction()
     {
-        return $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findAll()]);
+        $response = $this->render('task/list.html.twig', ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findAll()]);
+
+        $response->setSharedMaxAge(3600)->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $response;
     }
 
     /**
      * @Route("/tasks/create", name="task_create")
      * @Method({"GET", "POST"})
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, Response $response = null)
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
@@ -40,17 +45,23 @@ class TaskController extends Controller
 
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
 
+            if($response){ $response->expire(); }
+
             return $this->redirectToRoute('task_list');
         }
 
-        return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+        $newresponse = $this->render('task/create.html.twig', ['form' => $form->createView()]);
+
+        $newresponse->setSharedMaxAge(3600)->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $newresponse;
     }
 
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Task $task, Request $request)
+    public function editAction(Task $task, Request $request,  Response $response = null)
     {
         $form = $this->createForm(TaskType::class, $task);
 
@@ -61,25 +72,33 @@ class TaskController extends Controller
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
 
+            if($response){ $response->expire(); }
+
             return $this->redirectToRoute('task_list');
         }
 
-        return $this->render('task/edit.html.twig', [
+        $newresponse = $this->render('task/edit.html.twig', [
             'form' => $form->createView(),
             'task' => $task,
         ]);
+
+        $newresponse->setSharedMaxAge(3600)->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $newresponse;
     }
 
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle")
      * @Method({"GET", "POST"})
      */
-    public function toggleTaskAction(Task $task)
+    public function toggleTaskAction(Task $task, Response $response = null)
     {
         $task->toggle(!$task->isDone());
         $this->getDoctrine()->getManager()->flush();
 
         $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+
+        if($response){ $response->expire(); }
 
         return $this->redirectToRoute('task_list');
     }
@@ -88,14 +107,16 @@ class TaskController extends Controller
      * @Route("/tasks/{id}/delete", name="task_delete")
      * @Method({"GET", "POST"})
      */
-    public function deleteTaskAction(Task $task)
+    public function deleteTaskAction(Task $task, Response $response = null)
     {
         // anonymous author
-        if($task->getAuthor() === NULL || $task->getAuthor()->getUsername() === 'anonyme')
+        if($task->getAuthor() === null || $task->getAuthor()->getUsername() === 'anonyme')
         {
             if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
                 $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur.');
+
+                if($response){ $response->expire(); }
 
                 return $this->redirectToRoute('task_list');
             }
@@ -103,6 +124,8 @@ class TaskController extends Controller
         } elseif ($task->getAuthor()->getUsername() !== $this->get('security.token_storage')->getToken()->getUser()->getUsername()) {
 
             $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas son auteur.');
+
+            if($response){ $response->expire(); }
 
             return $this->redirectToRoute('task_list');
         }
@@ -112,6 +135,8 @@ class TaskController extends Controller
         $entityManager->flush();
 
         $this->addFlash('success', 'La tâche a bien été supprimée.');
+
+        if($response){ $response->expire(); }
 
         return $this->redirectToRoute('task_list');
     }
