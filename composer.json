@@ -17,8 +17,6 @@
             "Tests\\": "tests/"
         }
     },
-    "optimize-autoloader": true,
-    "apcu-autoloader": true,
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.4.*",
