@@ -14,6 +14,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        $response = $this->render('default/index.html.twig');
+
+        $response->setSharedMaxAge(3600); // cache for 3600 seconds
+
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+
+        return $response;
     }
 }
