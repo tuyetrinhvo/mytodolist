@@ -28,7 +28,7 @@
             logout_on_user_change: true
             logout: true
             
-### To access, you must be registred as ROLE_USER
+### To access, you must be registered as ROLE_USER
  
     access_control:
         - { path: ^/, roles: ROLE_USER }
