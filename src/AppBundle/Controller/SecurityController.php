@@ -20,34 +20,9 @@ class SecurityController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $response = $this->render('security/login.html.twig', array(
+        return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
-
-        $response->setSharedMaxAge(3600)->headers->addCacheControlDirective('must-revalidate', true);
-
-        return $response;
-    }
-
-}
-
- /*   /**
-     * @Route("/login_check", name="login_check")
-     * @Method({"POST"})
-     */
-/*    public function loginCheckAction()
-    {
-        // This code is never executed.
-    }
-
-/*    /**
-     * @Route("/logout", name="logout")
-     * @Method({"GET"})
-     */
-/*    public function logoutCheckAction()
-    {
-        // This code is never executed.
     }
 }
-*/

@@ -18,18 +18,14 @@ class UserController extends Controller
      */
     public function listAction()
     {
-        $response = $this->render('user/list.html.twig', ['users' => $this->getDoctrine()->getRepository('AppBundle:User')->findAll()]);
-
-        $response->setSharedMaxAge(3600)->headers->addCacheControlDirective('must-revalidate', true);
-
-        return $response;
+        return $this->render('user/list.html.twig', ['users' => $this->getDoctrine()->getRepository('AppBundle:User')->findAll()]);
     }
 
     /**
      * @Route("/users/create", name="user_create")
      * @Method({"GET", "POST"})
      */
-    public function createAction(Request $request, Response $response = null)
+    public function createAction(Request $request)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -37,32 +33,26 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $em->persist($user);
+            $em->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été ajouté.");
-
-            if($response){ $response->expire(); }
 
             return $this->redirectToRoute('user_list');
         }
 
-        $newresponse = $this->render('user/create.html.twig', ['form' => $form->createView()]);
-
-        $newresponse->setSharedMaxAge(3600)->headers->addCacheControlDirective('must-revalidate', true);
-
-        return $newresponse;
+        return $this->render('user/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * @Route("/users/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(User $user, Request $request, Response $response = null)
+    public function editAction(User $user, Request $request)
     {
         $form = $this->createForm(UserType::class, $user);
 
@@ -76,15 +66,9 @@ class UserController extends Controller
 
             $this->addFlash('success', "L'utilisateur a bien été modifié");
 
-            if($response){ $response->expire(); }
-
             return $this->redirectToRoute('user_list');
         }
 
-        $newresponse = $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
-
-        $newresponse->setSharedMaxAge(3600)->headers->addCacheControlDirective('must-revalidate', true);
-
-        return $newresponse;
+        return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }
 }
