@@ -13,8 +13,7 @@ class EditOldTasksCommand extends ContainerAwareCommand
     {
         $this
             ->setName('update:old:tasks')
-            ->setDescription('Update old tasks : link them to an anonymous user')
-        ;
+            ->setDescription('Update old tasks : link them to an anonymous user');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -30,7 +29,8 @@ class EditOldTasksCommand extends ContainerAwareCommand
             $userAnonyme->setPassword('anonyme');
             $entityManager->persist($userAnonyme);
 
-            foreach ($oldTasks as $task) { $task->setAuthor($userAnonyme); }
+            foreach ($oldTasks as $task) { $task->setAuthor($userAnonyme); 
+            }
             $entityManager->flush();
 
             $output->writeln('Old Tasks are updated !');

@@ -8,7 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserTest extends WebTestCase
 {
-    public function testUser(){
+    public function testUser()
+    {
 
         $user = new User();
         $user->setUsername('myusername');

@@ -8,7 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TaskTest extends WebTestCase
 {
-    public function testTask(){
+    public function testTask()
+    {
 
         $task = new Task();
         $task->setTitle('A TaskTest');

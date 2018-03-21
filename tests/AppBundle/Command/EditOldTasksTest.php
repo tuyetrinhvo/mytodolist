@@ -21,8 +21,10 @@ class EditOldTasksTest extends KernelTestCase
 
         $commandTester = new CommandTester($command);
 
-        $commandTester->execute([
-            'command'  => $command->getName()]);
+        $commandTester->execute(
+            [
+            'command'  => $command->getName()]
+        );
 
         $output = $commandTester->getDisplay();
         $this->assertContains('Old Tasks are updated !', $output);
