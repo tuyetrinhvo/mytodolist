@@ -140,7 +140,8 @@ class PhpIniRequirement extends Requirement
             $fulfilled = call_user_func($evaluation, $cfgValue);
         } else {
             if (null === $testMessage) {
-                $testMessage = sprintf('%s %s be %s in php.ini',
+                $testMessage = sprintf(
+                    '%s %s be %s in php.ini',
                     $cfgName,
                     $optional ? 'should' : 'must',
                     $evaluation ? 'enabled' : 'disabled'
@@ -148,7 +149,8 @@ class PhpIniRequirement extends Requirement
             }
 
             if (null === $helpHtml) {
-                $helpHtml = sprintf('Set <strong>%s</strong> to <strong>%s</strong> in php.ini<a href="#phpini">*</a>.',
+                $helpHtml = sprintf(
+                    'Set <strong>%s</strong> to <strong>%s</strong> in php.ini<a href="#phpini">*</a>.',
                     $cfgName,
                     $evaluation ? 'on' : 'off'
                 );
@@ -403,9 +405,11 @@ class SymfonyRequirements extends RequirementCollection
             $this->addRequirement(
                 version_compare($installedPhpVersion, $requiredPhpVersion, '>='),
                 sprintf('PHP version must be at least %s (%s installed)', $requiredPhpVersion, $installedPhpVersion),
-                sprintf('You are running PHP version "<strong>%s</strong>", but Symfony needs at least PHP "<strong>%s</strong>" to run.
+                sprintf(
+                    'You are running PHP version "<strong>%s</strong>", but Symfony needs at least PHP "<strong>%s</strong>" to run.
                 Before using Symfony, upgrade your PHP installation, preferably to the latest version.',
-                    $installedPhpVersion, $requiredPhpVersion),
+                    $installedPhpVersion, $requiredPhpVersion
+                ),
                 sprintf('Install PHP %s or newer (installed version is %s)', $requiredPhpVersion, $installedPhpVersion)
             );
         }
@@ -565,7 +569,7 @@ class SymfonyRequirements extends RequirementCollection
         /* optional recommendations follow */
 
         if (file_exists(__DIR__.'/../vendor/composer')) {
-            require_once __DIR__.'/../vendor/autoload.php';
+            include_once __DIR__.'/../vendor/autoload.php';
 
             try {
                 $r = new ReflectionClass('Sensio\Bundle\DistributionBundle\SensioDistributionBundle');
@@ -780,14 +784,14 @@ class SymfonyRequirements extends RequirementCollection
             $size = (int) substr($size, 0, -1);
         }
         switch ($unit) {
-            case 'g':
-                return $size * 1024 * 1024 * 1024;
-            case 'm':
-                return $size * 1024 * 1024;
-            case 'k':
-                return $size * 1024;
-            default:
-                return (int) $size;
+        case 'g':
+            return $size * 1024 * 1024 * 1024;
+        case 'm':
+            return $size * 1024 * 1024;
+        case 'k':
+            return $size * 1024;
+        default:
+            return (int) $size;
         }
     }
 
