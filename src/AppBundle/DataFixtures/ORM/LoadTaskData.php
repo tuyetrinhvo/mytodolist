@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * Class Doc Comment
+ *
+ * PHP version 7.0
+ *
+ * @category PHP_Class
+ * @package  AppBundle
+ * @author   trinhvo <ttvdep@gmail.com>
+ * @license  License Name
+ * @link     Link Name
+ */
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Task;
@@ -7,9 +17,24 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-
+/**
+ * Class LoadTaskData
+ *
+ * @category PHP_Class
+ * @package  AppBundle\DataFixtures\ORM
+ * @author   trinhvo <ttvdep@gmail.com>
+ * @license  License Name
+ * @link     Link Name
+ */
 class LoadTaskData extends AbstractFixture implements OrderedFixtureInterface
 {
+    /**
+     * Function load
+     *
+     * @param ObjectManager $manager Some argument description
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager)
     {
         $task1 = new Task();
@@ -42,6 +67,11 @@ class LoadTaskData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
     }
 
+    /**
+     * Function getOrder
+     *
+     * @return int
+     */
     public function getOrder()
     {
         return 3;

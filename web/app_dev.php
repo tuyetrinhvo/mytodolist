@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * Class Doc Comment
+ *
+ * PHP version 7.0
+ *
+ * @category PHP_Class
+ * @package  Web
+ * @author   trinhvo <ttvdep@gmail.com>
+ * @license  License Name
+ * @link     Link Name
+ */
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
@@ -19,10 +29,10 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 }
 
 /**
-* 
+ * App_dev.php
  *
- * @var \Composer\Autoload\ClassLoader $loader 
-*/
+ * @var \Composer\Autoload\ClassLoader $loader
+ */
 $loader = include __DIR__.'/../app/autoload.php';
 Debug::enable();
 
