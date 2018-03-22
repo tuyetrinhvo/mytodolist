@@ -1,4 +1,15 @@
 <?php
+/**
+ * Class Doc Comment
+ *
+ * PHP version 7.0
+ *
+ * @category PHP_Class
+ * @package  MyPackage
+ * @author   My Name <username@example.com>
+ * @license  Licence Name
+ * @link     Link Name
+ */
 
 namespace AppBundle\Controller;
 

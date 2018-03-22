@@ -2,7 +2,6 @@
 
 namespace Tests\AppBundle\Controller;
 
-
 use AppBundle\Entity\Task;
 use AppBundle\Entity\User;
 
@@ -76,12 +75,9 @@ class TaskControllerTest extends AbstractControllerTest
 
         $response = $this->client->getResponse()->getStatusCode();
 
-        if($this->client->getResponse()->isNotFound()) {
-
+        if ($this->client->getResponse()->isNotFound()) {
             $this->assertSame(404, $response);
-
         } else {
-
             $form = $crawler->selectButton('Modifier')->form();
 
             $form['task[title]'] = 'Title modified For Test';
@@ -107,12 +103,9 @@ class TaskControllerTest extends AbstractControllerTest
 
         $response = $this->client->getResponse()->getStatusCode();
 
-        if($this->client->getResponse()->isNotFound()) {
-
+        if ($this->client->getResponse()->isNotFound()) {
             $this->assertSame(404, $response);
-
         } else {
-
             $form = $crawler->selectButton('Modifier')->form();
 
             $form['task[title]'] = 'Title modified For Test';
@@ -147,12 +140,9 @@ class TaskControllerTest extends AbstractControllerTest
 
         $response = $this->client->getResponse()->getStatusCode();
 
-        if($this->client->getResponse()->isNotFound()) {
-
+        if ($this->client->getResponse()->isNotFound()) {
             $this->assertSame(404, $response);
-
         } else {
-
             $this->assertSame(302, $response);
 
             $this->client->followRedirect();
@@ -173,12 +163,9 @@ class TaskControllerTest extends AbstractControllerTest
 
         $response = $this->client->getResponse()->getStatusCode();
 
-        if($this->client->getResponse()->isNotFound()) {
-
+        if ($this->client->getResponse()->isNotFound()) {
             $this->assertSame(404, $response);
-
         } else {
-
             $this->assertSame(302, $response);
 
             $this->client->followRedirect();
@@ -201,12 +188,9 @@ class TaskControllerTest extends AbstractControllerTest
 
         $response = $this->client->getResponse()->getStatusCode();
 
-        if($this->client->getResponse()->isNotFound()) {
-
+        if ($this->client->getResponse()->isNotFound()) {
             $this->assertSame(404, $response);
-
         } else {
-
             $this->assertSame(302, $response);
 
             $this->client->followRedirect();
@@ -227,12 +211,9 @@ class TaskControllerTest extends AbstractControllerTest
 
         $response = $this->client->getResponse()->getStatusCode();
 
-        if($this->client->getResponse()->isNotFound()) {
-
+        if ($this->client->getResponse()->isNotFound()) {
             $this->assertSame(404, $response);
-
         } else {
-
             $this->assertSame(302, $response);
 
             $this->client->followRedirect();
@@ -244,5 +225,4 @@ class TaskControllerTest extends AbstractControllerTest
 
         //echo $this->client->getResponse()->getContent();
     }
-
 }

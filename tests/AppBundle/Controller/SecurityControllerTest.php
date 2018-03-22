@@ -2,7 +2,6 @@
 
 namespace Tests\AppBundle\Controller;
 
-
 class SecurityControllerTest extends AbstractControllerTest
 {
     public function testSecurityPage()
@@ -10,7 +9,6 @@ class SecurityControllerTest extends AbstractControllerTest
         $this->client->request('GET', '/login');
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-
     }
 
     public function testLogInInvalid()
@@ -46,7 +44,8 @@ class SecurityControllerTest extends AbstractControllerTest
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->assertContains(
-            'Bienvenue sur Todo List, l\'application vous permettant de gérer l\'ensemble de vos tâches sans effort !', $this->client->getCrawler()->filter('h1')->text()
+            'Bienvenue sur Todo List, l\'application vous permettant de gérer l\'ensemble de vos tâches sans effort !',
+            $this->client->getCrawler()->filter('h1')->text()
         );
 
         //echo $this->client->getResponse()->getContent();

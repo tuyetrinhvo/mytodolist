@@ -408,7 +408,8 @@ class SymfonyRequirements extends RequirementCollection
                 sprintf(
                     'You are running PHP version "<strong>%s</strong>", but Symfony needs at least PHP "<strong>%s</strong>" to run.
                 Before using Symfony, upgrade your PHP installation, preferably to the latest version.',
-                    $installedPhpVersion, $requiredPhpVersion
+                    $installedPhpVersion,
+                    $requiredPhpVersion
                 ),
                 sprintf('Install PHP %s or newer (installed version is %s)', $requiredPhpVersion, $installedPhpVersion)
             );
@@ -445,7 +446,9 @@ class SymfonyRequirements extends RequirementCollection
 
         if (version_compare($installedPhpVersion, '7.0.0', '<')) {
             $this->addPhpIniRequirement(
-                'date.timezone', true, false,
+                'date.timezone',
+                true,
+                false,
                 'date.timezone setting must be set',
                 'Set the "<strong>date.timezone</strong>" setting in php.ini<a href="#phpini">*</a> (like Europe/Paris).'
             );
@@ -532,11 +535,15 @@ class SymfonyRequirements extends RequirementCollection
 
         if (extension_loaded('xdebug')) {
             $this->addPhpIniRequirement(
-                'xdebug.show_exception_trace', false, true
+                'xdebug.show_exception_trace',
+                false,
+                true
             );
 
             $this->addPhpIniRequirement(
-                'xdebug.scream', false, true
+                'xdebug.scream',
+                false,
+                true
             );
 
             $this->addPhpIniRecommendation(
@@ -569,7 +576,7 @@ class SymfonyRequirements extends RequirementCollection
         /* optional recommendations follow */
 
         if (file_exists(__DIR__.'/../vendor/composer')) {
-            include_once __DIR__.'/../vendor/autoload.php';
+            require_once __DIR__.'/../vendor/autoload.php';
 
             try {
                 $r = new ReflectionClass('Sensio\Bundle\DistributionBundle\SensioDistributionBundle');
@@ -784,14 +791,14 @@ class SymfonyRequirements extends RequirementCollection
             $size = (int) substr($size, 0, -1);
         }
         switch ($unit) {
-        case 'g':
-            return $size * 1024 * 1024 * 1024;
-        case 'm':
-            return $size * 1024 * 1024;
-        case 'k':
-            return $size * 1024;
-        default:
-            return (int) $size;
+            case 'g':
+                return $size * 1024 * 1024 * 1024;
+            case 'm':
+                return $size * 1024 * 1024;
+            case 'k':
+                return $size * 1024;
+            default:
+                return (int) $size;
         }
     }
 

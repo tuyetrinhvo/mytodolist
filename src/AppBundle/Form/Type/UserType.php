@@ -17,7 +17,9 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class, ['label' => "Nom d'utilisateur"])
             ->add(
-                'password', RepeatedType::class, [
+                'password',
+                RepeatedType::class,
+                [
                 'type'              => PasswordType::class,
                 'invalid_message'   => 'Les deux mots de passe doivent correspondre.',
                 'required'          => true,
@@ -27,7 +29,9 @@ class UserType extends AbstractType
             )
             ->add('email', EmailType::class, ['label' => 'Adresse email'])
             ->add(
-                'roles', ChoiceType::class, [
+                'roles',
+                ChoiceType::class,
+                [
                     'label'     => 'Type de compte',
                     'choices'   => [
                         'User'  => 'ROLE_USER',

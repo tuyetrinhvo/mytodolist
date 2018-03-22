@@ -4,9 +4,9 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Composer\Autoload\ClassLoader;
 
 /**
-* 
+*
  *
- * @var ClassLoader $loader 
+ * @var ClassLoader $loader
 */
 $loader = include __DIR__.'/../vendor/autoload.php';
 

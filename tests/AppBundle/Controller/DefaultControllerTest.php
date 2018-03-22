@@ -2,7 +2,6 @@
 
 namespace Tests\AppBundle\Controller;
 
-
 class DefaultControllerTest extends AbstractControllerTest
 {
     public function testIndex()

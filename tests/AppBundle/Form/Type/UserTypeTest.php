@@ -2,7 +2,6 @@
 
 namespace tests\AppBundle\Form\Type;
 
-
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\UserType;
 use tests\AppBundle\Controller\AbstractControllerTest;

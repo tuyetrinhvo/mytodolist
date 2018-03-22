@@ -2,7 +2,6 @@
 
 namespace tests\AppBundle\Form\Type;
 
-
 use AppBundle\Entity\Task;
 use AppBundle\Form\Type\TaskType;
 use Symfony\Component\Form\Test\TypeTestCase;

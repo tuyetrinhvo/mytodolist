@@ -19,9 +19,9 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 }
 
 /**
-* 
+*
  *
- * @var \Composer\Autoload\ClassLoader $loader 
+ * @var \Composer\Autoload\ClassLoader $loader
 */
 $loader = include __DIR__.'/../app/autoload.php';
 Debug::enable();

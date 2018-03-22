@@ -2,10 +2,8 @@
 
 namespace tests\AppBundle\Controller;
 
-
 class UserControllerTest extends AbstractControllerTest
 {
-
     public function testListPageUser()
     {
         $this->logIn(['ROLE_ADMIN']);
@@ -122,5 +120,4 @@ class UserControllerTest extends AbstractControllerTest
 
         //echo $this->client->getResponse()->getContent();
     }
-
 }

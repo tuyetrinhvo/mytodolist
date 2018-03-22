@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Created by PhpStorm.
+ * User: trinhvo
+ */
+
 namespace AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -22,19 +27,18 @@ class EditOldTasksCommand extends ContainerAwareCommand
         $oldTasks = $entityManager->getRepository('AppBundle:Task')->findByAuthor(null);
 
         if (!empty($oldTasks)) {
-
             $userAnonyme = new User();
             $userAnonyme->setUsername('anonyme');
             $userAnonyme->setEmail('anonyme@anonyme.com');
             $userAnonyme->setPassword('anonyme');
             $entityManager->persist($userAnonyme);
 
-            foreach ($oldTasks as $task) { $task->setAuthor($userAnonyme); 
+            foreach ($oldTasks as $task) {
+                $task->setAuthor($userAnonyme);
             }
             $entityManager->flush();
 
             $output->writeln('Old Tasks are updated !');
-
         } else {
             $output->writeln('Old Tasks are updated !');
         }

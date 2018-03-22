@@ -1,4 +1,15 @@
 <?php
+/**
+ * Class Doc Comment
+ *
+ * PHP version 7.0
+ *
+ * @category PHP_Class
+ * @package  MyPackage
+ * @author   My Name <username@example.com>
+ * @license  Licence Name
+ * @link     Link Name
+ */
 
 namespace AppBundle\Controller;
 
@@ -21,10 +32,11 @@ class SecurityController extends Controller
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render(
-            'security/login.html.twig', array(
+            'security/login.html.twig',
+            [
             'last_username' => $lastUsername,
             'error'         => $error,
-            )
+            ]
         );
     }
 }

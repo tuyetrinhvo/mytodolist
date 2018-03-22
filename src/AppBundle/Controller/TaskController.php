@@ -1,4 +1,15 @@
 <?php
+/**
+ * Class Doc Comment
+ *
+ * PHP version 7.0
+ *
+ * @category PHP_Class
+ * @package  MyPackage
+ * @author   My Name <username@example.com>
+ * @license  Licence Name
+ * @link     Link Name
+ */
 
 namespace AppBundle\Controller;
 
@@ -66,7 +77,8 @@ class TaskController extends Controller
         }
 
         return $this->render(
-            'task/edit.html.twig', [
+            'task/edit.html.twig',
+            [
             'form' => $form->createView(),
             'task' => $task,
             ]
@@ -94,16 +106,13 @@ class TaskController extends Controller
     public function deleteTaskAction(Task $task)
     {
         // anonymous author
-        if($task->getAuthor() === null || $task->getAuthor()->getUsername() === 'anonyme') {
-            if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-
+        if ($task->getAuthor() === null || $task->getAuthor()->getUsername() === 'anonyme') {
+            if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
                 $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur.');
 
                 return $this->redirectToRoute('task_list');
             }
-
         } elseif ($task->getAuthor()->getUsername() !== $this->get('security.token_storage')->getToken()->getUser()->getUsername()) {
-
             $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas son auteur.');
 
             return $this->redirectToRoute('task_list');
@@ -118,4 +127,3 @@ class TaskController extends Controller
         return $this->redirectToRoute('task_list');
     }
 }
-
