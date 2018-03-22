@@ -158,13 +158,8 @@ class TaskController extends Controller
     public function deleteTaskAction(Task $task)
     {
         // anonymous author
-        if ($task->getAuthor()===null||$task->getAuthor()->getUsername()==='anonyme'
-        ) {
-
-            if (!$this->get(
-                'security.authorization_checker'
-            )->isGranted('ROLE_ADMIN')
-            ) {
+        if ($task->getAuthor() === null || $task->getAuthor()->getUsername() === 'anonyme') {
+            if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
                 $this->addFlash(
                     'error',
@@ -175,10 +170,7 @@ class TaskController extends Controller
                 return $this->redirectToRoute('task_list');
             }
 
-        } elseif ($task->getAuthor()->getUsername() !== $this->get(
-            'security.token_storage'
-        )->getToken()->getUser()->getUsername()
-        ) {
+        } elseif ($task->getAuthor()->getUsername() !== $this->get('security.token_storage')->getToken()->getUser()->getUsername()) {
 
             $this->addFlash(
                 'error',
