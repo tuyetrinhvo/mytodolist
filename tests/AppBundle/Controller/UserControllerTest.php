@@ -1,9 +1,33 @@
 <?php
-
+/**
+ * Class Doc Comment
+ *
+ * PHP version 7.0
+ *
+ * @category PHP_Class
+ * @package  Tests
+ * @author   trinhvo <ttvdep@gmail.com>
+ * @license  License Name
+ * @link     Link Name
+ */
 namespace tests\AppBundle\Controller;
 
+/**
+ * Class UserControllerTest
+ *
+ * @category PHP_Class
+ * @package  Tests\AppBundle\Controller
+ * @author   trinhvo <ttvdep@gmail.com>
+ * @license  License Name
+ * @link     Link Name
+ */
 class UserControllerTest extends AbstractControllerTest
 {
+    /**
+     * Function testListPageUser
+     *
+     * @return void
+     */
     public function testListPageUser()
     {
         $this->logIn(['ROLE_ADMIN']);
@@ -14,6 +38,11 @@ class UserControllerTest extends AbstractControllerTest
         //echo $this->client->getResponse()->getContent();
     }
 
+    /**
+     * Function testCreateUser
+     *
+     * @return void
+     */
     public function testCreateUser()
     {
         $this->logIn(['ROLE_ADMIN']);
@@ -35,11 +64,19 @@ class UserControllerTest extends AbstractControllerTest
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertContains('L\'utilisateur a bien été ajouté.', $this->client->getCrawler()->filter('.alert')->text());
+        $this->assertContains(
+            'L\'utilisateur a bien été ajouté.',
+            $this->client->getCrawler()->filter('.alert')->text()
+        );
 
         //echo $this->client->getResponse()->getContent();
     }
 
+    /**
+     * Function testCreateUserInvalid
+     *
+     * @return void
+     */
     public function testCreateUserInvalid()
     {
         $this->logIn(['ROLE_ADMIN']);
@@ -57,11 +94,19 @@ class UserControllerTest extends AbstractControllerTest
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertContains('Vous devez saisir un nom d\'utilisateur', $this->client->getCrawler()->filter('.help-block')->text());
+        $this->assertContains(
+            'Vous devez saisir un nom d\'utilisateur',
+            $this->client->getCrawler()->filter('.help-block')->text()
+        );
 
         //echo $this->client->getResponse()->getContent();
     }
 
+    /**
+     * Function testEditUser
+     *
+     * @return void
+     */
     public function testEditUser()
     {
         $this->logIn(['ROLE_ADMIN']);
@@ -83,11 +128,19 @@ class UserControllerTest extends AbstractControllerTest
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertContains('L\'utilisateur a bien été modifié', $this->client->getCrawler()->filter('.alert')->text());
+        $this->assertContains(
+            'L\'utilisateur a bien été modifié',
+            $this->client->getCrawler()->filter('.alert')->text()
+        );
 
         //echo $this->client->getResponse()->getContent();
     }
 
+    /**
+     * Function testEditUserInvalid
+     *
+     * @return void
+     */
     public function testEditUserInvalid()
     {
         $this->logIn(['ROLE_ADMIN']);
@@ -105,11 +158,19 @@ class UserControllerTest extends AbstractControllerTest
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->assertContains('Les deux mots de passe doivent correspondre.', $this->client->getCrawler()->filter('.help-block')->text());
+        $this->assertContains(
+            'Les deux mots de passe doivent correspondre.',
+            $this->client->getCrawler()->filter('.help-block')->text()
+        );
 
         //echo $this->client->getResponse()->getContent();
     }
 
+    /**
+     * Function testUserAccessDenied
+     *
+     * @return void
+     */
     public function testUserAccessDenied()
     {
         $this->logIn(['ROLE_USER']);

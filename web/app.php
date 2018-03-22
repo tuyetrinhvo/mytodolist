@@ -1,12 +1,22 @@
 <?php
-
+/**
+ * Class Doc Comment
+ *
+ * PHP version 7.0
+ *
+ * @category PHP_Class
+ * @package  Web
+ * @author   trinhvo <ttvdep@gmail.com>
+ * @license  License Name
+ * @link     Link Name
+ */
 use Symfony\Component\HttpFoundation\Request;
 
 /**
-*
+ * App.php
  *
  * @var \Composer\Autoload\ClassLoader $loader
-*/
+ */
 $loader = include __DIR__.'/../app/autoload.php';
 require_once __DIR__.'/../var/bootstrap.php.cache';
 
