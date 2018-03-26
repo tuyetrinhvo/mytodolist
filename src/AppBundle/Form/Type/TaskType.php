@@ -12,9 +12,11 @@
  */
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Task;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class TaskType
@@ -42,5 +44,21 @@ class TaskType extends AbstractType
             ->add('content', TextareaType::class)
             //->add('author') ===> must be the user authenticated
         ;
+    }
+
+    /**
+     * Function configureOptions
+     *
+     * @param OptionsResolver $resolver Some argument description
+     *
+     * @return void
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(
+            [
+            'data_class' => Task::class,
+            ]
+        );
     }
 }
