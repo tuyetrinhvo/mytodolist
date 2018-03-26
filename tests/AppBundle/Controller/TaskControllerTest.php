@@ -253,8 +253,7 @@ class TaskControllerTest extends AbstractControllerTest
             $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
             $this->assertContains(
-                'Vous ne pouvez pas supprimer 
-            cette tâche car vous n\'êtes pas administrateur.',
+                'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur.',
                 $this->client->getCrawler()->filter('.alert')->text()
             );
         }
@@ -287,8 +286,7 @@ class TaskControllerTest extends AbstractControllerTest
             $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
             $this->assertContains(
-                'Vous ne pouvez pas supprimer 
-            cette tâche car vous n\'êtes pas son auteur.',
+                'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas son auteur.',
                 $this->client->getCrawler()->filter('.alert')->text()
             );
         }

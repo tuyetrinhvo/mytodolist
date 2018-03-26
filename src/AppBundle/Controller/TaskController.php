@@ -163,8 +163,7 @@ class TaskController extends Controller
 
                 $this->addFlash(
                     'error',
-                    'Vous ne pouvez pas supprimer cette tâche car
-                     vous n\'êtes pas administrateur.'
+                    'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas administrateur.'
                 );
 
                 return $this->redirectToRoute('task_list');
@@ -174,8 +173,7 @@ class TaskController extends Controller
 
             $this->addFlash(
                 'error',
-                'Vous ne pouvez pas supprimer cette tâche car
-                 vous n\'êtes pas son auteur.'
+                'Vous ne pouvez pas supprimer cette tâche car vous n\'êtes pas son auteur.'
             );
 
             return $this->redirectToRoute('task_list');

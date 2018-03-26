@@ -81,9 +81,7 @@ class SecurityControllerTest extends AbstractControllerTest
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->assertContains(
-            'Bienvenue sur Todo List, 
-            l\'application vous permettant de gérer 
-            l\'ensemble de vos tâches sans effort !',
+            "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !",
             $this->client->getCrawler()->filter('h1')->text()
         );
 
